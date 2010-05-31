@@ -4,8 +4,11 @@
 		
 		if(settings) { $.extend(config, settings); }
 		
+		var containers = [];
 		this.each(function() {
 			var containerId = $(this).attr('id'); if(!containerId) { containerId = (Math.random()); }
+			containers.push({'cId': containerId, 'moving': false});
+			
 			var container = $('#page-' + $(this).children(0).attr('id')).parent();
 			var pages = container.children(':not(' + config.notPage + ')');
 			var links = $(this); var linkz = links.children();
@@ -17,6 +20,13 @@
 			
 			linkz.each(function(){
 				$(this).click(function(event){
+					for(cAM = 0; cAM < containers.length; cAM++) {
+						if(containers[cAM].cId == containerId) {
+							if(containers[cAM].moving == true) return false;
+							else containers[cAM].moving = true;
+							break;
+						}
+					}
 					var contentHeight = container.height();
 					var current = container.attr('class');
 					var currentHeight = $('#' + current).outerHeight(true);
@@ -33,6 +43,7 @@
 							$(this).height('0px').show();
 							$('#' + next).parent().hide().height('auto').fadeIn(350, function(){
 								container.attr('class', next);
+								containers[cAM].moving = false;
 							});
 						});
 					} else {
@@ -41,7 +52,9 @@
 							$('#' + next).parent().hide().height('auto').fadeIn(350, function(){
 								container.attr('class', next).animate({
 									height: nextHeight + 'px'
-								}, 200);
+								}, 200, function(){
+									containers[cAM].moving = false;
+								});
 							});
 						})
 					}
