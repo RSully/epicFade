@@ -1,4 +1,4 @@
-A jQuery plugin that allows fading of pages in a unique way. 
+A jQuery (tested with 1.4.2) plugin that allows fading of pages in a unique way. 
 
 How to use? In its most simple form:
 
