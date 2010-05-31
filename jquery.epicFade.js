@@ -19,9 +19,11 @@
 			container.height( $('#page-' + container.attr('class')).outerHeight(true) );
 			
 			linkz.each(function(){
+				var thisLink = this;
+				thisLink.containerId = containerId;
 				$(this).click(function(event){
 					for(cAM = 0; cAM < containers.length; cAM++) {
-						if(containers[cAM].cId == containerId) {
+						if(containers[cAM].cId == thisLink.containerId) {
 							if(containers[cAM].moving == true) return false;
 							else containers[cAM].moving = true;
 							break;
