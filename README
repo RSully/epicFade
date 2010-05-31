@@ -1,0 +1,17 @@
+A jQuery plugin that allows fading of pages in a unique way. 
+
+How to use? In its most simple form:
+
+	$(document).ready(function(){
+		$('#nav').epicFade();
+	});
+
+Options
+	landingPage (id of the page to show when page loads, default is the first link found)
+	notPage (anything inside the page container you don't want to be considered a page, default is '.clear')
+	
+Syntax for links and pages:
+	<a href="#X" id="X">Y</a>
+	<div id="page-X">Z</div>
+	
+	X = page id, Y = link text, Z = page content
